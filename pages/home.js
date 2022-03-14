@@ -11,7 +11,7 @@ const { Meta } = Card;
 const data = [
   {
     title: "藏书阁",
-    url: "/book",
+    url: "/books",
     img_url: "https://sm.ms/image/fXDmASPzlR6K5g1",
   },
   {
@@ -31,6 +31,21 @@ const data = [
   },
   {
     title: "图库",
+    url: "/tool",
+    img_url: "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
+  },
+  {
+    title: "计算机技术博客",
+    url: "/tool",
+    img_url: "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
+  },
+  {
+    title: "新闻",
+    url: "/tool",
+    img_url: "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
+  },
+  {
+    title: "信息安全工具",
     url: "/tool",
     img_url: "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
   },
@@ -54,10 +69,19 @@ export default function InfoAtticHome() {
       <main className={styles.main}>
         {data.map((item) => {
           return (
-            <Card hoverable style={{ width: 240, marginBottom: '28px' }}>
-              <div style={{ display: "flex", justifyContent: "center", fontSize: '1.2rem', fontWeight: 'bold'}}>
-                {item.title}
-              </div>
+            <Card hoverable style={{ width: 240, marginBottom: "28px" }}>
+              <Link href={item.url}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    fontSize: "1.2rem",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {item.title}
+                </div>
+              </Link>
             </Card>
           );
         })}
