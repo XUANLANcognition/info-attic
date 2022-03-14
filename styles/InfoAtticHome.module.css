@@ -1,0 +1,30 @@
+.title {
+  margin: 36px 0;
+  line-height: 1.15;
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.title1 {
+  margin: 36px 0;
+  line-height: 1.15;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.title2 {
+  margin: 36px 0;
+  line-height: 1.15;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.main {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 0 96px;
+}
