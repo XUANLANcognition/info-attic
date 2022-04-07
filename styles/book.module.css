@@ -12,3 +12,7 @@
 .a:hover {
   color: gray;
 }
+
+.body {
+  min-height: 100%;
+}

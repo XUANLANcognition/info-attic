@@ -3,7 +3,7 @@ export default function InfoAtticFooter() {
     <div
       style={{
         background: "#292f3d",
-        height: "200px",
+        height: "100%",
         width: "100%",
         display: "flex",
         justifyContent: "center",

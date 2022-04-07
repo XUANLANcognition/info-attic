@@ -62,12 +62,20 @@ function BookAttic({ init_books, init_count }) {
         <title>Book Attic</title>
       </Head>
 
-      <main className={styles.main}>
+      <main
+        style={{
+          minHeight: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            flexGrow: "1",
           }}
         >
           <div
@@ -76,10 +84,14 @@ function BookAttic({ init_books, init_count }) {
               display: "flex",
               alignItems: "center",
               padding: "36px 0",
+              fontWeight: "bold",
+              fontSize: "30px",
+              marginBottom: "18px",
             }}
           >
-            <h1>藏书阁</h1>
+            藏书阁
           </div>
+
           <div
             style={{
               width: "80%",
@@ -244,7 +256,7 @@ export async function getServerSideProps() {
 
   try {
     const res = await axios.get(
-      "http://infoattic.cn:8080/api/v1/books/?format=json"
+      "http://127.0.0.1:8000/api/v1/books/?format=json"
     );
     const data = res.data;
     return {
