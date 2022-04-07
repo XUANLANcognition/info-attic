@@ -136,7 +136,7 @@ function BookAttic({ init_books, init_count }) {
                     >
                       {books.map((book) => {
                         return (
-                          <Link href={"/book/subject/" + book.id} passHref>
+                          <Link href={"/book/subject/" + book.id} key={book.id}>
                             <a target="_blank" className={styles.a}>
                               <div
                                 key={book.book_name}
