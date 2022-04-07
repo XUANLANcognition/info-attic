@@ -11,7 +11,7 @@ const { Meta } = Card;
 const data = [
   {
     title: "藏书阁",
-    url: "/books",
+    url: "/book/",
     img_url: "https://sm.ms/image/fXDmASPzlR6K5g1",
   },
   {
@@ -69,7 +69,7 @@ export default function InfoAtticHome() {
       <main className={styles.main}>
         {data.map((item) => {
           return (
-            <Card hoverable style={{ width: 240, marginBottom: "28px" }}>
+            <Card key={item.title} hoverable style={{ width: 240, marginBottom: "28px" }}>
               <Link href={item.url}>
                 <div
                   style={{
