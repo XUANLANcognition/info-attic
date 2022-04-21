@@ -7,6 +7,7 @@ import axios from "axios";
 import { Card } from "antd";
 import { Input, Spin, Divider } from "antd";
 import { Pagination } from "antd";
+import { Row, Col } from "antd";
 import { useState } from "react";
 
 import Advertisement from "../../componets/Advertisement";
@@ -70,7 +71,7 @@ function BookAttic({ init_books, init_count }) {
           justifyContent: "space-between",
         }}
       >
-        <div
+        <Row
           style={{
             display: "flex",
             flexDirection: "column",
@@ -78,169 +79,181 @@ function BookAttic({ init_books, init_count }) {
             flexGrow: "1",
           }}
         >
-          <div
-            style={{
-              width: "80%",
-              display: "flex",
-              alignItems: "center",
-              padding: "36px 0",
-              fontWeight: "bold",
-              fontSize: "30px",
-              marginBottom: "18px",
-            }}
-          >
-            藏书阁
-          </div>
-
-          <div
-            style={{
-              width: "80%",
-              minHeight: "100%",
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            <div style={{ width: "75%" }}>
-              <div style={{ marginRight: "24px" }}>
-                {/* 图书库区块 */}
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    margin: "0 36px 0 0",
-                  }}
-                >
-                  <div
-                    style={{
-                      fontSize: "24px",
-                      fontWeight: "bold",
-                      color: "#000",
-                    }}
-                  >
-                    图书库
-                  </div>
-                  <div style={{ display: "flex", width: "80%" }}>
-                    <Search
-                      placeholder="输入想要查询的书籍"
-                      onSearch={onSearch}
-                      onChange={onChange}
-                      enterButton
-                      size="middle"
-                      style={{ width: "100%" }}
-                      loading={isloading}
-                      value={search}
-                    />
-                  </div>
-                </div>
-                <div style={{ marginRight: "36px" }}>
-                  <Divider />
-                </div>
-                <div style={{ display: "flex", flexWrap: "wrap" }}>
-                  <Spin size="large" spinning={isloading}>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        flexWrap: "wrap",
-                        color: "black",
-                      }}
-                    >
-                      {books.map((book) => {
-                        return (
-                          <Link href={"/book/subject/" + book.id} key={book.id}>
-                            <a target="_blank" className={styles.a}>
-                              <div
-                                key={book.book_name}
-                                style={{ margin: "0 36px 36px 0" }}
-                              >
-                                <div
-                                  key={book.book_name}
-                                  style={{
-                                    width: 130,
-                                    height: 190,
-                                    marginBottom: "6px",
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    justifyContent: "center",
-                                    background: "url(" + book.book_cover + ")",
-                                    backgroundSize: "cover",
-                                    backgroundPosition: "center",
-                                    borderRadius: "3px",
-                                    boxShadow:
-                                      "5px 5px 20px #b0b0b0, -5px -5px 30px #eeeeee",
-                                  }}
-                                ></div>
-                                <div
-                                  style={{
-                                    margin: "6px 0px",
-                                  }}
-                                >
-                                  <div
-                                    style={{
-                                      fontWeight: "bold",
-                                      fontSize: "18px",
-                                      maxWidth: "130px",
-                                      whiteSpace: "nowrap",
-                                      overflow: "hidden",
-                                      textOverflow: "ellipsis",
-                                    }}
-                                  >
-                                    {book.book_name}
-                                  </div>
-                                  <div
-                                    style={{
-                                      fontWeight: "normal",
-                                      fontSize: "14px",
-                                      maxWidth: "130px",
-                                      whiteSpace: "nowrap",
-                                      overflow: "hidden",
-                                      textOverflow: "ellipsis",
-                                    }}
-                                  >
-                                    {book.book_author}
-                                  </div>
-                                </div>
-                              </div>
-                            </a>
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  </Spin>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    margin: "10px 36px 10px 0",
-                  }}
-                >
-                  <Pagination
-                    current={page}
-                    defaultPageSize={12}
-                    onChange={onChangePage}
-                    total={count}
-                    loading={isloading}
-                    size={36}
-                  />
-                </div>
-                <div style={{ marginRight: "36px" }}>
-                  <Divider />
-                </div>
-              </div>
-            </div>
+          <Col xs={22} sm={20} md={20} lg={20} xl={20} xxl={18}>
             <div
               style={{
                 display: "flex",
-                flexGrow: "1",
-                flexDirection: "row-reverse",
+                alignItems: "center",
+                padding: "36px 0",
+                fontWeight: "bold",
+                fontSize: "30px",
+                marginBottom: "18px",
               }}
             >
-              <Advertisement></Advertisement>
+              藏书阁
             </div>
-          </div>
-        </div>
+
+            <div
+              style={{
+                minHeight: "100%",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <div style={{ width: "75%" }}>
+                <div style={{ marginRight: "24px" }}>
+                  {/* 图书库区块 */}
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      margin: "0 36px 0 0",
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: "24px",
+                        fontWeight: "bold",
+                        color: "#000",
+                      }}
+                    >
+                      图书库
+                    </div>
+                    <div style={{ display: "flex", width: "80%" }}>
+                      <Search
+                        placeholder="输入想要查询的书籍"
+                        onSearch={onSearch}
+                        onChange={onChange}
+                        enterButton
+                        size="middle"
+                        style={{ width: "100%" }}
+                        loading={isloading}
+                        value={search}
+                      />
+                    </div>
+                  </div>
+                  <div style={{ marginRight: "36px" }}>
+                    <Divider />
+                  </div>
+                  <div style={{ display: "flex", flexWrap: "wrap" }}>
+                    <Spin size="large" spinning={isloading}>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          flexWrap: "wrap",
+                          color: "black",
+                        }}
+                      >
+                        {books.map((book) => {
+                          return (
+                            <Link
+                              href={"/book/subject/" + book.id}
+                              key={book.id}
+                            >
+                              <a target="_blank" className={styles.a}>
+                                <div
+                                  key={book.book_name}
+                                  style={{ margin: "0 36px 36px 0" }}
+                                >
+                                  <div
+                                    key={book.book_name}
+                                    style={{
+                                      width: 130,
+                                      height: 190,
+                                      marginBottom: "6px",
+                                      display: "flex",
+                                      flexDirection: "column",
+                                      justifyContent: "center",
+                                      background:
+                                        "url(" + book.book_cover + ")",
+                                      backgroundSize: "cover",
+                                      backgroundPosition: "center",
+                                      borderRadius: "3px",
+                                      boxShadow:
+                                        "5px 5px 20px #b0b0b0, -5px -5px 30px #eeeeee",
+                                    }}
+                                  ></div>
+                                  <div
+                                    style={{
+                                      margin: "6px 0px",
+                                    }}
+                                  >
+                                    <div
+                                      style={{
+                                        fontWeight: "bold",
+                                        fontSize: "18px",
+                                        maxWidth: "130px",
+                                        whiteSpace: "nowrap",
+                                        overflow: "hidden",
+                                        textOverflow: "ellipsis",
+                                      }}
+                                    >
+                                      {book.book_name}
+                                    </div>
+                                    <div
+                                      style={{
+                                        fontWeight: "normal",
+                                        fontSize: "14px",
+                                        maxWidth: "130px",
+                                        whiteSpace: "nowrap",
+                                        overflow: "hidden",
+                                        textOverflow: "ellipsis",
+                                      }}
+                                    >
+                                      {book.book_author}
+                                    </div>
+                                  </div>
+                                </div>
+                              </a>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </Spin>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      margin: "10px 36px 10px 0",
+                    }}
+                  >
+                    <Pagination
+                      current={page}
+                      defaultPageSize={12}
+                      onChange={onChangePage}
+                      total={count}
+                      loading={isloading}
+                      size={36}
+                    />
+                  </div>
+                  <div style={{ marginRight: "36px" }}>
+                    <Divider />
+                  </div>
+                </div>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexGrow: "1",
+                  flexDirection: "row-reverse",
+                }}
+              >
+                <Advertisement></Advertisement>
+              </div>
+            </div>
+          </Col>
+        </Row>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            flexGrow: "1",
+          }}
+        ></div>
 
         <div>
           <InfoAtticFooter></InfoAtticFooter>
