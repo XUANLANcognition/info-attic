@@ -12,6 +12,7 @@ import styles from "../../../../styles/bookpage.module.css";
 import Advertisement from "../../../../componets/Advertisement";
 import BookPageMenu from "../../../../componets/book/BookPageMenu";
 import InfoAtticFooter from "../../../../componets/InfoAtticFooter";
+import IANav from "../../../../componets/IANav";
 
 const { Search } = Input;
 
@@ -66,161 +67,166 @@ function BookSubject(props) {
       <Head>
         <title>{props.init_book.book_name}</title>
       </Head>
-      <main className={styles.main}>
-        <div
-          style={{
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            flexGrow: "1",
-          }}
-        >
-          <div
-            style={{
-              width: "80%",
-              height: "100%",
-              background: "url(" + props.init_book.book_cover + ")",
-              backgroundSize: "100% 100%",
-              backgroundPosition: "center",
-              position: "relative",
-              marginTop: "30px",
-              borderRadius: "10px",
-              boxShadow: "3px 3px 3px #bababa, -6px -6px 6px #ffffff",
-            }}
-          >
-            <div /* 蒙版 */
-              style={{
-                position: "absolute",
-                width: "100%",
-                height: "100%",
-                zIndex: "0",
-                top: "0",
-                zIndex: "0",
-                background: "rgba(255, 255, 255, .5)",
-                backdropFilter: "blur(50px)",
-                borderRadius: "10px",
-                boxShadow: "3px 3px 3 px #bababa, -3px -3px 3px #ffffff",
-              }}
-            ></div>
-            <div /* 书籍信息 */
-              style={{
-                display: "flex",
-                justifyContent: "flex-start",
-                minWidth: "100%",
-                margin: "20px 60px",
-                position: "relative",
-                top: "0",
-              }}
-            >
-              <div
-                style={{
-                  borderRadius: "8px",
-                  background: "url(" + props.init_book.book_cover + ")",
-                  width: "190px",
-                  height: "280px",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              ></div>
-              <div
-                style={{
-                  flexGrow: "1",
-                  display: "flex",
-                  flexDirection: "column",
-                  padding: "10px 50px ",
-                }}
-              >
-                <div style={{ fontSize: "30px", fontWeight: "bold" }}>
-                  {props.init_book.book_name}
-                </div>
-                <div
-                  style={{
-                    marginTop: "20px",
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <div className={styles.book_info_title}>作者 :</div>
-                    <div style={{ fontSize: "18px" }}>
-                      {props.init_book.book_author}
-                    </div>
-                  </div>
-                  <div style={{ display: "flex", alignItems: "baseline" }}>
-                    <div className={styles.book_info_title}>出版社 :</div>
-                    <div style={{ fontSize: "18px" }}>
-                      {props.init_book.book_publisher}
-                    </div>
-                  </div>
-                  <div style={{ display: "flex", alignItems: "baseline" }}>
-                    <div className={styles.book_info_title}>出版时间 :</div>
-                    <div style={{ fontSize: "18px" }}>
-                      {props.init_book.book_pub_date}
-                    </div>
-                  </div>
-                  <div style={{ display: "flex", alignItems: "baseline" }}>
-                    <div className={styles.book_info_title}>ISBN :</div>
-                    <div style={{ fontSize: "18px" }}>
-                      {props.init_book.book_isbn}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <main
+        style={{ display: "flex", flexDirection: "column", minHeight: "100%" }}
+      >
+        <IANav></IANav>
 
+        <div style={{ flexGrow: "1" }}>
           <div
             style={{
-              width: "80%",
-              marginTop: "36px",
+              width: "100%",
               display: "flex",
-              justifyContent: "space-between",
+              flexDirection: "column",
+              alignItems: "center",
+              flexGrow: "1",
             }}
           >
-            <div style={{ width: "70%" }}>
-              <div
-                style={{
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                  margin: "0 0 24px 0",
-                }}
-              >
-                <BookPageMenu
-                  book_id={props.init_book.id}
-                  current="index"
-                ></BookPageMenu>
-              </div>
-              <Divider />
-              <div
-                style={{
-                  fontSize: "18px",
-                  whiteSpace: "pre-wrap",
-                  marginBottom: "60px",
-                }}
-              >
-                {props.init_book.book_abstract}
-              </div>
-            </div>
             <div
               style={{
-                display: "flex",
-                flexGrow: "1",
-                justifyContent: "flex-end",
-                marginLeft: "20px",
+                width: "80%",
+                height: "100%",
+                background: "url(" + props.init_book.book_cover + ")",
+                backgroundSize: "100% 100%",
+                backgroundPosition: "center",
+                position: "relative",
+                marginTop: "30px",
+                borderRadius: "10px",
+                boxShadow: "3px 3px 3px #bababa, -6px -6px 6px #ffffff",
               }}
             >
-              <Advertisement></Advertisement>
+              <div /* 蒙版 */
+                style={{
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%",
+                  zIndex: "0",
+                  top: "0",
+                  zIndex: "0",
+                  background: "rgba(255, 255, 255, .5)",
+                  backdropFilter: "blur(50px)",
+                  borderRadius: "10px",
+                  boxShadow: "3px 3px 3 px #bababa, -3px -3px 3px #ffffff",
+                }}
+              ></div>
+              <div /* 书籍信息 */
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  minWidth: "100%",
+                  margin: "20px 60px",
+                  position: "relative",
+                  top: "0",
+                }}
+              >
+                <div
+                  style={{
+                    borderRadius: "8px",
+                    background: "url(" + props.init_book.book_cover + ")",
+                    width: "190px",
+                    height: "280px",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                ></div>
+                <div
+                  style={{
+                    flexGrow: "1",
+                    display: "flex",
+                    flexDirection: "column",
+                    padding: "10px 50px ",
+                  }}
+                >
+                  <div style={{ fontSize: "30px", fontWeight: "bold" }}>
+                    {props.init_book.book_name}
+                  </div>
+                  <div
+                    style={{
+                      marginTop: "20px",
+                      height: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <div className={styles.book_info_title}>作者 :</div>
+                      <div style={{ fontSize: "18px" }}>
+                        {props.init_book.book_author}
+                      </div>
+                    </div>
+                    <div style={{ display: "flex", alignItems: "baseline" }}>
+                      <div className={styles.book_info_title}>出版社 :</div>
+                      <div style={{ fontSize: "18px" }}>
+                        {props.init_book.book_publisher}
+                      </div>
+                    </div>
+                    <div style={{ display: "flex", alignItems: "baseline" }}>
+                      <div className={styles.book_info_title}>出版时间 :</div>
+                      <div style={{ fontSize: "18px" }}>
+                        {props.init_book.book_pub_date}
+                      </div>
+                    </div>
+                    <div style={{ display: "flex", alignItems: "baseline" }}>
+                      <div className={styles.book_info_title}>ISBN :</div>
+                      <div style={{ fontSize: "18px" }}>
+                        {props.init_book.book_isbn}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              style={{
+                width: "80%",
+                marginTop: "36px",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <div style={{ width: "70%" }}>
+                <div
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                    margin: "0 0 24px 0",
+                  }}
+                >
+                  <BookPageMenu
+                    book_id={props.init_book.id}
+                    current="index"
+                  ></BookPageMenu>
+                </div>
+                <Divider />
+                <div
+                  style={{
+                    fontSize: "16px",
+                    whiteSpace: "pre-wrap",
+                    marginBottom: "60px",
+                    lineHeight: "30px",
+                  }}
+                >
+                  {props.init_book.book_abstract}
+                </div>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexGrow: "1",
+                  justifyContent: "flex-end",
+                  marginLeft: "20px",
+                }}
+              >
+                <Advertisement></Advertisement>
+              </div>
             </div>
           </div>
         </div>
 
-        <div style={{ width: "100%" }}>
-          <InfoAtticFooter></InfoAtticFooter>
-        </div>
+        <InfoAtticFooter></InfoAtticFooter>
       </main>
     </div>
   );

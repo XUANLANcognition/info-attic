@@ -4,6 +4,7 @@ import { Card } from "antd";
 
 import IALogin from "../componets/Login";
 import InfoAtticFooter from "../componets/InfoAtticFooter";
+import IANav from "../componets/IANav";
 
 export default function Login() {
   return (
@@ -11,20 +12,19 @@ export default function Login() {
       <Head>
         <title>登录</title>
       </Head>
+
       <main
-        style={{
-          minHeight: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-        }}
+        style={{ display: "flex", flexDirection: "column", minHeight: "100%" }}
       >
+        <IANav></IANav>
+
         <div
           style={{
+            flexGrow: "1",
             display: "flex",
+            flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            flexGrow: '1'
           }}
         >
           <Card style={{ width: 300 }}>

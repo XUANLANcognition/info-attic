@@ -12,6 +12,7 @@ import { useState } from "react";
 
 import Advertisement from "../../componets/Advertisement";
 import InfoAtticFooter from "../../componets/InfoAtticFooter";
+import IANav from "../../componets/IANav";
 
 const { Search } = Input;
 
@@ -71,6 +72,7 @@ function BookAttic({ init_books, init_count }) {
           justifyContent: "space-between",
         }}
       >
+        <IANav></IANav>
         <Row
           style={{
             display: "flex",
