@@ -6,8 +6,9 @@ import styles from "../styles/InfoAtticHome.module.css";
 
 import IANav from "../componets/IANav";
 import InfoAtticFooter from "../componets/InfoAtticFooter";
+import parseCookies from "./api/parsecookies";
 
-export default function InfoAtticHome() {
+function InfoAtticHome({cookie_data}) {
   return (
     <div>
       <Head>
@@ -17,11 +18,11 @@ export default function InfoAtticHome() {
       </Head>
 
       <main style={{ display: "flex", flexDirection: "column", minHeight: '100%' }}>
-        <IANav></IANav>
+        <IANav cookieData={cookie_data}></IANav>
 
         <div style={{flexGrow: '1'}}>
           <h1 className={styles.title}>欢迎进入 Info-Attics.</h1>
-          <h1 className={styles.title1}>信息大观园</h1>
+          <h1 className={styles.title1}>信息大观园 </h1>
         </div>
 
         <InfoAtticFooter></InfoAtticFooter>
@@ -29,3 +30,15 @@ export default function InfoAtticHome() {
     </div>
   );
 }
+
+export async function getServerSideProps(context) {
+  const data = parseCookies(context.req);
+
+  return {
+    props: {
+      cookie_data: data,
+    },
+  };
+}
+
+export default InfoAtticHome;

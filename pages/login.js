@@ -5,8 +5,9 @@ import { Card } from "antd";
 import IALogin from "../componets/Login";
 import InfoAtticFooter from "../componets/InfoAtticFooter";
 import IANav from "../componets/IANav";
+import parseCookies from "./api/parsecookies";
 
-export default function Login() {
+function LoginPage({ cookie_data }) {
   return (
     <div>
       <Head>
@@ -16,7 +17,7 @@ export default function Login() {
       <main
         style={{ display: "flex", flexDirection: "column", minHeight: "100%" }}
       >
-        <IANav></IANav>
+        <IANav cookieData={cookie_data}></IANav>
 
         <div
           style={{
@@ -28,7 +29,7 @@ export default function Login() {
           }}
         >
           <Card style={{ width: 300 }}>
-            <IALogin></IALogin>
+            <IALogin cookieData={cookie_data}></IALogin>
           </Card>
         </div>
 
@@ -37,3 +38,15 @@ export default function Login() {
     </div>
   );
 }
+
+export async function getServerSideProps(context) {
+  const data = parseCookies(context.req);
+
+  return {
+    props: {
+      cookie_data: data,
+    },
+  };
+}
+
+export default LoginPage;

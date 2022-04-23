@@ -284,6 +284,7 @@ export async function getServerSideProps() {
     return {
       props: {
         init_books: [],
+        init_count: 0,
       },
     };
     console.log(error);

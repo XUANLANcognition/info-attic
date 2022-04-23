@@ -1,20 +1,33 @@
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button, Checkbox, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { useCookies } from "react-cookie";
+import { useRouter } from "next/router";
 
 import axios from "axios";
 
-export default function IALogin() {
+import parseCookies from "../pages/api/parsecookies";
+
+export default function IALogin(props) {
+  const [cookies, setCookie] = useCookies();
+  const router = useRouter();
+
   const onFinish = (values) => {
     axios
-      .post("http://127.0.0.1:8000/token/", {
+      .post("http://1.15.7.160:8080/token/", {
         username: values.username,
         password: values.password,
       })
       .then(function (response) {
         console.log(response);
+        console.log(cookies);
+        setCookie("user_access_token", response.data.access);
+        setCookie("user_refresh_token", response.data.refresh);
+        message.success("登录成功")
+        router.replace("/home");
       })
       .catch(function (error) {
-        console.log(error);
+        console.log("error");
+        message.error('帐号或密码错误');
       });
   };
 
