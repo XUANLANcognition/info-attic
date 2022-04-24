@@ -26,7 +26,7 @@ export default function InfoAtticFooter() {
               marginRight: "28px",
             }}
           >
-            <div style={{marginBottom: '12px'}}> 
+            <div style={{marginBottom: '12px', color: 'wheat'}}> 
                 信息服务
             </div>
             
@@ -41,7 +41,7 @@ export default function InfoAtticFooter() {
               marginRight: "28px",
             }}
           >
-            <div style={{marginBottom: '12px'}}> 
+            <div style={{marginBottom: '12px', color: 'wheat'}}> 
                 信息服务
             </div>
             <div style={{ fontSize: "16px", fontWeight: "normal" }}>藏书阁</div>

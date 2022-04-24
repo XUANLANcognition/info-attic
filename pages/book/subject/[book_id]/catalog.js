@@ -123,8 +123,8 @@ function BookSubject(props) {
                   style={{
                     borderRadius: "8px",
                     background: "url(" + props.init_book.book_cover + ")",
-                    width: "190px",
-                    height: "280px",
+                    width: "170px",
+                    height: "250px",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}
@@ -137,7 +137,7 @@ function BookSubject(props) {
                     padding: "10px 50px ",
                   }}
                 >
-                  <div style={{ fontSize: "30px", fontWeight: "bold" }}>
+                  <div style={{ fontSize: "24px", fontWeight: "bold" }}>
                     {props.init_book.book_name}
                   </div>
                   <div
@@ -152,25 +152,25 @@ function BookSubject(props) {
                   >
                     <div style={{ display: "flex", alignItems: "center" }}>
                       <div className={styles.book_info_title}>作者 :</div>
-                      <div style={{ fontSize: "18px" }}>
+                      <div style={{ fontSize: "16px" }}>
                         {props.init_book.book_author}
                       </div>
                     </div>
                     <div style={{ display: "flex", alignItems: "baseline" }}>
                       <div className={styles.book_info_title}>出版社 :</div>
-                      <div style={{ fontSize: "18px" }}>
+                      <div style={{ fontSize: "16px" }}>
                         {props.init_book.book_publisher}
                       </div>
                     </div>
                     <div style={{ display: "flex", alignItems: "baseline" }}>
                       <div className={styles.book_info_title}>出版时间 :</div>
-                      <div style={{ fontSize: "18px" }}>
+                      <div style={{ fontSize: "16px" }}>
                         {props.init_book.book_pub_date}
                       </div>
                     </div>
                     <div style={{ display: "flex", alignItems: "baseline" }}>
                       <div className={styles.book_info_title}>ISBN :</div>
-                      <div style={{ fontSize: "18px" }}>
+                      <div style={{ fontSize: "16px" }}>
                         {props.init_book.book_isbn}
                       </div>
                     </div>

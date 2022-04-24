@@ -139,15 +139,21 @@ export default function IANav(props) {
               <div>
                 <Popover
                   placement="bottomRight"
-                  title={
-                    jwtDecode(props.cookieData.user_access_token).payload
-                      .usesname
-                  }
                   content={
                     <div>
-                      <Button type="text" block>
-                        主页
-                      </Button>
+                      <Link
+                        href={
+                          "/people/" +
+                          jwtDecode(props.cookieData.user_access_token).payload
+                            .usesname
+                        }
+                        passHref
+                      >
+                        <Button type="text" block>
+                          主页
+                        </Button>
+                      </Link>
+
                       <Button
                         danger
                         type="text"

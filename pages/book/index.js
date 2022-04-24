@@ -7,16 +7,27 @@ import axios from "axios";
 import { Card } from "antd";
 import { Input, Spin, Divider } from "antd";
 import { Pagination } from "antd";
-import { Row, Col } from "antd";
+import { Row, Col, Carousel } from "antd";
 import { useState } from "react";
 
 import Advertisement from "../../componets/Advertisement";
 import InfoAtticFooter from "../../componets/InfoAtticFooter";
 import IANav from "../../componets/IANav";
+import parseCookies from "../api/parsecookies";
 
 const { Search } = Input;
 
-function BookAttic({ init_books, init_count }) {
+const contentStyle = {
+  height: "230px",
+  color: "wheat",
+  fontSize: '24px',
+  lineHeight: "160px",
+  textAlign: "center",
+  background: "#2a2f3e",
+  borderRadius: "16px",
+};
+
+function BookAttic({ init_books, init_count, cookie_data }) {
   const [books, setBooks] = useState(init_books);
   const [isloading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
@@ -72,7 +83,8 @@ function BookAttic({ init_books, init_count }) {
           justifyContent: "space-between",
         }}
       >
-        <IANav></IANav>
+        <IANav cookieData={cookie_data}></IANav>
+
         <Row
           style={{
             display: "flex",
@@ -82,17 +94,18 @@ function BookAttic({ init_books, init_count }) {
           }}
         >
           <Col xs={22} sm={20} md={20} lg={20} xl={20} xxl={18}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                padding: "36px 0",
-                fontWeight: "bold",
-                fontSize: "30px",
-                marginBottom: "18px",
-              }}
-            >
-              藏书阁
+            <div style={{ margin: '18px 0 36px 0' }}>
+              <Carousel effect="fade" autoplay>
+                <div>
+                  <h3 style={contentStyle}>藏书阁</h3>
+                </div>
+                <div>
+                  <h3 style={contentStyle}>热榜</h3>
+                </div>
+                <div>
+                  <h3 style={contentStyle}>书籍</h3>
+                </div>
+              </Carousel>
             </div>
 
             <div
@@ -172,9 +185,7 @@ function BookAttic({ init_books, init_count }) {
                                         "url(" + book.book_cover + ")",
                                       backgroundSize: "cover",
                                       backgroundPosition: "center",
-                                      borderRadius: "3px",
-                                      boxShadow:
-                                        "5px 5px 20px #b0b0b0, -5px -5px 30px #eeeeee",
+                                      borderRadius: "8px",
                                     }}
                                   ></div>
                                   <div
@@ -257,18 +268,16 @@ function BookAttic({ init_books, init_count }) {
           }}
         ></div>
 
-        <div>
-          <InfoAtticFooter></InfoAtticFooter>
-        </div>
+        <InfoAtticFooter></InfoAtticFooter>
       </main>
     </div>
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
-
+  const cookie_data = parseCookies(context.req);
   try {
     const res = await axios.get(
       "http://infoattic.cn:8080/api/v1/books/?format=json"
@@ -278,6 +287,7 @@ export async function getServerSideProps() {
       props: {
         init_books: data.results,
         init_count: data.count,
+        cookie_data: cookie_data,
       },
     };
   } catch (error) {
@@ -285,6 +295,7 @@ export async function getServerSideProps() {
       props: {
         init_books: [],
         init_count: 0,
+        cookie_data: cookie_data,
       },
     };
     console.log(error);

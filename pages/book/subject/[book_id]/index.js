@@ -14,6 +14,8 @@ import BookPageMenu from "../../../../componets/book/BookPageMenu";
 import InfoAtticFooter from "../../../../componets/InfoAtticFooter";
 import IANav from "../../../../componets/IANav";
 
+import parseCookies from "../../../api/parsecookies";
+
 const { Search } = Input;
 
 function BookSubject(props) {
@@ -70,7 +72,7 @@ function BookSubject(props) {
       <main
         style={{ display: "flex", flexDirection: "column", minHeight: "100%" }}
       >
-        <IANav></IANav>
+        <IANav cookieData={props.cookie_data}></IANav>
 
         <div style={{ flexGrow: "1" }}>
           <div
@@ -123,8 +125,8 @@ function BookSubject(props) {
                   style={{
                     borderRadius: "8px",
                     background: "url(" + props.init_book.book_cover + ")",
-                    width: "190px",
-                    height: "280px",
+                    width: "170px",
+                    height: "250px",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}
@@ -137,7 +139,7 @@ function BookSubject(props) {
                     padding: "10px 50px ",
                   }}
                 >
-                  <div style={{ fontSize: "30px", fontWeight: "bold" }}>
+                  <div style={{ fontSize: "24px", fontWeight: "bold" }}>
                     {props.init_book.book_name}
                   </div>
                   <div
@@ -152,25 +154,25 @@ function BookSubject(props) {
                   >
                     <div style={{ display: "flex", alignItems: "center" }}>
                       <div className={styles.book_info_title}>作者 :</div>
-                      <div style={{ fontSize: "18px" }}>
+                      <div style={{ fontSize: "16px" }}>
                         {props.init_book.book_author}
                       </div>
                     </div>
                     <div style={{ display: "flex", alignItems: "baseline" }}>
                       <div className={styles.book_info_title}>出版社 :</div>
-                      <div style={{ fontSize: "18px" }}>
+                      <div style={{ fontSize: "16px" }}>
                         {props.init_book.book_publisher}
                       </div>
                     </div>
                     <div style={{ display: "flex", alignItems: "baseline" }}>
                       <div className={styles.book_info_title}>出版时间 :</div>
-                      <div style={{ fontSize: "18px" }}>
+                      <div style={{ fontSize: "16px" }}>
                         {props.init_book.book_pub_date}
                       </div>
                     </div>
                     <div style={{ display: "flex", alignItems: "baseline" }}>
                       <div className={styles.book_info_title}>ISBN :</div>
-                      <div style={{ fontSize: "18px" }}>
+                      <div style={{ fontSize: "16px" }}>
                         {props.init_book.book_isbn}
                       </div>
                     </div>
@@ -232,14 +234,15 @@ function BookSubject(props) {
   );
 }
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps(context) {
+  const cookie_data = parseCookies(context.req);
   try {
     const res1 = await axios.get(
-      "http://infoattic.cn:8080/api/v1/books/" + query.book_id + "?format=json"
+      "http://infoattic.cn:8080/api/v1/books/" + context.query.book_id + "?format=json"
     );
     const res2 = await axios.get(
       "http://infoattic.cn:8080/api/v1/bookquotes/?book=" +
-        query.book_id +
+        context.query.book_id +
         "&format=json"
     );
     return {
@@ -247,6 +250,7 @@ export async function getServerSideProps({ query }) {
         init_book: res1.data,
         init_book_quote: res2.data.results,
         quote_count: res2.data.count,
+        cookie_data: cookie_data
       },
     };
   } catch (error) {
@@ -255,6 +259,7 @@ export async function getServerSideProps({ query }) {
         init_book: {},
         init_book_quote: {},
         quote_count: 0,
+        cookie_data: cookie_data
       },
     };
     console.log(error);
