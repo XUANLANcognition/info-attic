@@ -5,7 +5,7 @@ import styles from "../../styles/book.module.css";
 import axios from "axios";
 
 import { Card } from "antd";
-import { Input, Spin, Divider } from "antd";
+import { Input, Spin, Divider, Button  } from "antd";
 import { Pagination } from "antd";
 import { Row, Col, Carousel } from "antd";
 import { useState } from "react";
@@ -145,6 +145,7 @@ function BookAttic({ init_books, init_count, cookie_data }) {
                         style={{ width: "100%" }}
                         loading={isloading}
                         value={search}
+                        allowClear
                       />
                     </div>
                   </div>

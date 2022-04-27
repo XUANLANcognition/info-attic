@@ -67,8 +67,12 @@ export default function IANav(props) {
   const router = useRouter();
 
   function ClickLogout() {
-    removeCookie("user_access_token");
-    removeCookie("user_refresh_token");
+    try {
+      removeCookie("user_access_token", { path: "/" });
+      removeCookie("user_refresh_token", { path: "/" });
+    } catch (error) {
+      console.log(error);
+    }
     router.reload();
   }
 
@@ -145,7 +149,7 @@ export default function IANav(props) {
                         href={
                           "/people/" +
                           jwtDecode(props.cookieData.user_access_token).payload
-                            .usesname
+                            .user_id
                         }
                         passHref
                       >
@@ -169,7 +173,11 @@ export default function IANav(props) {
                   <Avatar
                     shape="square"
                     size={36}
-                    src="https://joeschmoe.io/api/v1/random"
+                    src={
+                      jwtDecode(props.cookieData.user_access_token).payload
+                        .avatar
+                    }
+                    style={{borderRadius: '3px', cursor: 'pointer'}}
                   />
                 </Popover>
               </div>

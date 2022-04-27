@@ -185,6 +185,7 @@ function BookSubject(props) {
                 marginTop: "36px",
                 display: "flex",
                 justifyContent: "space-between",
+                marginBottom: '60px'
               }}
             >
               <div style={{ width: "70%" }}>
@@ -256,7 +257,7 @@ function BookSubject(props) {
 
                     <div
                       style={{
-                        margin: "30px 0 90px 0",
+                        margin: "30px 0 0 0",
                         display: "flex",
                         flexDirection: "row-reverse",
                       }}

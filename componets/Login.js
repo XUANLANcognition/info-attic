@@ -8,7 +8,7 @@ import axios from "axios";
 import parseCookies from "../pages/api/parsecookies";
 
 export default function IALogin(props) {
-  const [cookies, setCookie] = useCookies();
+  const [cookies, setCookie] = useCookies(["user_access_token", "user_refresh_token"]);
   const router = useRouter();
 
   const onFinish = (values) => {
@@ -18,16 +18,15 @@ export default function IALogin(props) {
         password: values.password,
       })
       .then(function (response) {
-        console.log(response);
+        setCookie("user_access_token", response.data.access, { path: "/" });
+        setCookie("user_refresh_token", response.data.refresh, { path: "/" });
         console.log(cookies);
-        setCookie("user_access_token", response.data.access);
-        setCookie("user_refresh_token", response.data.refresh);
-        message.success("登录成功")
+        message.success("登录成功");
         router.replace("/home");
       })
       .catch(function (error) {
         console.log("error");
-        message.error('帐号或密码错误');
+        message.error("帐号或密码错误");
       });
   };
 
