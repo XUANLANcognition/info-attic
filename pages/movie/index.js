@@ -5,7 +5,7 @@ import styles from "../../styles/book.module.css";
 import axios from "axios";
 
 import { Card } from "antd";
-import { Input, Spin, Divider, Button  } from "antd";
+import { Input, Spin, Divider } from "antd";
 import { Pagination } from "antd";
 import { Row, Col, Carousel } from "antd";
 import { useState } from "react";
@@ -27,7 +27,7 @@ const contentStyle = {
   borderRadius: "16px",
 };
 
-function BookAttic({ init_books, init_count, cookie_data }) {
+function MovieAttic({ init_books, init_count, cookie_data }) {
   const [books, setBooks] = useState(init_books);
   const [isloading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
@@ -52,7 +52,7 @@ function BookAttic({ init_books, init_count, cookie_data }) {
     setLoading(true);
     try {
       const res = await axios.get(
-        "http://infoattic.cn:8080/api/v1/books/?format=json&search=" +
+        "http://infoattic.cn:8080/api/v1/movies/?format=json&search=" +
           query_search +
           "&page=" +
           query_page
@@ -72,7 +72,7 @@ function BookAttic({ init_books, init_count, cookie_data }) {
   return (
     <div>
       <Head>
-        <title>Book Attic</title>
+        <title>Movie Attic(影视)</title>
       </Head>
 
       <main
@@ -97,13 +97,13 @@ function BookAttic({ init_books, init_count, cookie_data }) {
             <div style={{ margin: '18px 0 36px 0' }}>
               <Carousel effect="fade" autoplay>
                 <div>
-                  <h3 style={contentStyle}>藏书阁</h3>
+                  <h3 style={contentStyle}>影视阁</h3>
                 </div>
                 <div>
                   <h3 style={contentStyle}>热榜</h3>
                 </div>
                 <div>
-                  <h3 style={contentStyle}>书籍</h3>
+                  <h3 style={contentStyle}>影视</h3>
                 </div>
               </Carousel>
             </div>
@@ -133,11 +133,11 @@ function BookAttic({ init_books, init_count, cookie_data }) {
                         color: "#000",
                       }}
                     >
-                      图书库
+                      影视库
                     </div>
                     <div style={{ display: "flex", width: "80%" }}>
                       <Search
-                        placeholder="输入想要查询的书籍"
+                        placeholder="输入想要查询的影视"
                         onSearch={onSearch}
                         onChange={onChange}
                         enterButton
@@ -165,16 +165,16 @@ function BookAttic({ init_books, init_count, cookie_data }) {
                         {books.map((book) => {
                           return (
                             <Link
-                              href={"/book/subject/" + book.id}
+                              href={"/movie/subject/" + book.id}
                               key={book.id}
                             >
                               <a target="_blank" className={styles.a}>
                                 <div
-                                  key={book.book_name}
+                                  key={book.movie_name}
                                   style={{ margin: "0 36px 20px 0" }}
                                 >
                                   <div
-                                    key={book.book_name}
+                                    key={book.movie_name}
                                     style={{
                                       width: 130,
                                       height: 190,
@@ -183,7 +183,7 @@ function BookAttic({ init_books, init_count, cookie_data }) {
                                       flexDirection: "column",
                                       justifyContent: "center",
                                       background:
-                                        "url(" + book.book_cover + ")",
+                                        "url(" + book.movie_cover + ")",
                                       backgroundSize: "cover",
                                       backgroundPosition: "center",
                                       borderRadius: "5px",
@@ -204,19 +204,7 @@ function BookAttic({ init_books, init_count, cookie_data }) {
                                         textOverflow: "ellipsis",
                                       }}
                                     >
-                                      {book.book_name}
-                                    </div>
-                                    <div
-                                      style={{
-                                        fontWeight: "normal",
-                                        fontSize: "14px",
-                                        maxWidth: "130px",
-                                        whiteSpace: "nowrap",
-                                        overflow: "hidden",
-                                        textOverflow: "ellipsis",
-                                      }}
-                                    >
-                                      {book.book_author}
+                                      {book.movie_name}
                                     </div>
                                   </div>
                                 </div>
@@ -281,7 +269,7 @@ export async function getServerSideProps(context) {
   const cookie_data = parseCookies(context.req);
   try {
     const res = await axios.get(
-      "http://infoattic.cn:8080/api/v1/books/?format=json"
+      "http://infoattic.cn:8080/api/v1/movies/?format=json"
     );
     const data = res.data;
     return {
@@ -303,4 +291,4 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default BookAttic;
+export default MovieAttic;
