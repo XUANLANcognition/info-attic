@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
+import { withRouter } from "next/router";
 
 import styles from "../styles/InfoAtticHome.module.css";
 
@@ -8,6 +9,7 @@ import { Card } from "antd";
 
 import IANav from "../componets/IANav";
 import InfoAtticFooter from "../componets/InfoAtticFooter";
+import parseCookies from "./api/parsecookies";
 
 const { Meta } = Card;
 
@@ -54,7 +56,7 @@ const data = [
   },
 ];
 
-export default function MorePage() {
+function MorePage(props) {
   return (
     <div>
       <Head>
@@ -66,14 +68,16 @@ export default function MorePage() {
       <main
         style={{ display: "flex", flexDirection: "column", minHeight: "100%" }}
       >
-        <IANav></IANav>
+        <IANav cookieData={props.cookie_data}></IANav>
 
         <div style={{ flexGrow: "1" }}>
           <h2 className={styles.title2}>
             当前页面还在草创阶段，较为简单。下面是不同信息阁楼的入口：
           </h2>
 
-          <div style={{display: 'flex', margin: '36px 88px', flexWrap: 'wrap'}}>
+          <div
+            style={{ display: "flex", margin: "36px 88px", flexWrap: "wrap" }}
+          >
             {data.map((item) => {
               return (
                 <Card
@@ -104,3 +108,14 @@ export default function MorePage() {
     </div>
   );
 }
+
+export async function getServerSideProps(context) {
+  const cookie_data = parseCookies(context.req);
+  return {
+    props: {
+      cookie_data: cookie_data,
+    },
+  };
+}
+
+export default withRouter(MorePage);

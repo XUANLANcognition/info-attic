@@ -10,7 +10,7 @@ import axios from "axios";
 import styles from "../../../../styles/bookpage.module.css";
 
 import Advertisement from "../../../../componets/Advertisement";
-import BookPageMenu from "../../../../componets/book/BookPageMenu";
+import MoviePageMenu from "../../../../componets/movie/MoviePageMenu";
 import InfoAtticFooter from "../../../../componets/InfoAtticFooter";
 import IANav from "../../../../componets/IANav";
 
@@ -200,10 +200,10 @@ function MovieSubject(props) {
                     margin: "0 0 24px 0",
                   }}
                 >
-                  <BookPageMenu
+                  <MoviePageMenu
                     movie_id={props.init_movie.id}
-                    current="index"
-                  ></BookPageMenu>
+                    current="介绍"
+                  ></MoviePageMenu>
                 </div>
                 <Divider />
                 <div

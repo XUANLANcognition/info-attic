@@ -22,7 +22,7 @@ export default function IALogin(props) {
         setCookie("user_refresh_token", response.data.refresh, { path: "/" });
         console.log(cookies);
         message.success("登录成功");
-        router.replace("/home");
+        router.back()
       })
       .catch(function (error) {
         console.log("error");

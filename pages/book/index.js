@@ -241,6 +241,7 @@ function BookAttic({ init_books, init_count, cookie_data }) {
                       total={count}
                       loading={isloading}
                       size={36}
+                      showSizeChanger={false}
                     />
                   </div>
                   <div style={{ marginRight: "36px" }}>

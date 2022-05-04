@@ -3,18 +3,17 @@ import Link from "next/link";
 
 const menu = [
   { url: "", title: "介绍" },
-  { url: "/catalog", title: "目录" },
   { url: "/refer", title: "摘录" },
 ];
 
-export default function BookPageMenu(props) {
+export default function MoviePageMenu(props) {
   return (
     <div>
       <Space size={14} split={<Divider type="vertical" />}>
         {menu.map((item) => {
           return (
             <Link
-              href={`/book/subject/${encodeURIComponent(props.book_id)}${item.url}`}
+              href={`/movie/subject/${encodeURIComponent(props.movie_id)}${item.url}`}
               passHref
             >
               <div style={{ cursor: "pointer" }}>

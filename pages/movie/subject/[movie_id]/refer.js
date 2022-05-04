@@ -4,22 +4,21 @@ import Router, { withRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Pagination, Input, Empty, Spin, Space, Divider } from "antd";
+import { Pagination, Input, Empty, Spin, Badge, Divider } from "antd";
 import axios from "axios";
 
 import styles from "../../../../styles/bookpage.module.css";
 
 import Advertisement from "../../../../componets/Advertisement";
-import BookPageMenu from "../../../../componets/book/BookPageMenu";
+import MoviePageMenu from "../../../../componets/movie/MoviePageMenu";
 import InfoAtticFooter from "../../../../componets/InfoAtticFooter";
 import IANav from "../../../../componets/IANav";
-
 import parseCookies from "../../../api/parsecookies";
 
 const { Search } = Input;
 
-function BookSubject(props) {
-  const [book_quotes, setBookQuotes] = useState(props.init_book_quote);
+function MovieSubject(props) {
+  const [movie_quotes, setMovieQuotes] = useState(props.init_movie_quote);
   const [quote_page, setQuotePage] = useState(1);
   const [quote_count, setQuoteCount] = useState(props.quote_count);
   const [isloading, setLoading] = useState(false);
@@ -36,14 +35,14 @@ function BookSubject(props) {
     setLoading(true);
     try {
       const res = await axios.get(
-        "http://infoattic.cn:8080/api/v1/bookquotes/?format=json&book=" +
-          props.init_book.id +
+        "http://infoattic.cn:8080/api/v1/moviequotes/?format=json&movie=" +
+          props.init_movie.id +
           "&search=" +
           query_search +
           "&page=" +
           query_page
       );
-      setBookQuotes(res.data.results);
+      setMovieQuotes(res.data.results);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -67,7 +66,7 @@ function BookSubject(props) {
   return (
     <div>
       <Head>
-        <title>{props.init_book.book_name}</title>
+        <title>{props.init_movie.movie_name}</title>
       </Head>
       <main
         style={{ display: "flex", flexDirection: "column", minHeight: "100%" }}
@@ -88,7 +87,7 @@ function BookSubject(props) {
               style={{
                 width: "80%",
                 height: "100%",
-                background: "url(" + props.init_book.book_cover + ")",
+                background: "url(" + props.init_movie.movie_cover + ")",
                 backgroundSize: "100% 100%",
                 backgroundPosition: "center",
                 position: "relative",
@@ -121,16 +120,19 @@ function BookSubject(props) {
                   top: "0",
                 }}
               >
-                <div
-                  style={{
-                    borderRadius: "8px",
-                    background: "url(" + props.init_book.book_cover + ")",
-                    width: "170px",
-                    height: "250px",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                ></div>
+                <Badge.Ribbon text={props.init_movie.movie_type} color={"red"}>
+                  <div
+                    style={{
+                      borderRadius: "8px",
+                      background: "url(" + props.init_movie.movie_cover + ")",
+                      width: "170px",
+                      height: "250px",
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      minWidth: "170px",
+                    }}
+                  ></div>
+                </Badge.Ribbon>
                 <div
                   style={{
                     flexGrow: "1",
@@ -140,7 +142,7 @@ function BookSubject(props) {
                   }}
                 >
                   <div style={{ fontSize: "24px", fontWeight: "bold" }}>
-                    {props.init_book.book_name}
+                    {props.init_movie.movie_name}
                   </div>
                   <div
                     style={{
@@ -152,28 +154,28 @@ function BookSubject(props) {
                       flexWrap: "wrap",
                     }}
                   >
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                      <div className={styles.book_info_title}>作者 :</div>
+                    <div style={{ display: "flex", alignItems: "baseline" }}>
+                      <div className={styles.book_info_title}>导演 :</div>
                       <div style={{ fontSize: "16px" }}>
-                        {props.init_book.book_author}
+                        {props.init_movie.movie_director}
                       </div>
                     </div>
                     <div style={{ display: "flex", alignItems: "baseline" }}>
-                      <div className={styles.book_info_title}>出版社 :</div>
+                      <div className={styles.book_info_title}>编剧 :</div>
                       <div style={{ fontSize: "16px" }}>
-                        {props.init_book.book_publisher}
+                        {props.init_movie.movie_screenwriter}
+                      </div>
+                    </div>
+                    <div style={{ display: "flex", alignItems: "baseline" }}>
+                      <div className={styles.book_info_title}>主演 :</div>
+                      <div style={{ fontSize: "16px" }}>
+                        {props.init_movie.movie_starring}
                       </div>
                     </div>
                     <div style={{ display: "flex", alignItems: "baseline" }}>
                       <div className={styles.book_info_title}>出版时间 :</div>
                       <div style={{ fontSize: "16px" }}>
-                        {props.init_book.book_pub_date}
-                      </div>
-                    </div>
-                    <div style={{ display: "flex", alignItems: "baseline" }}>
-                      <div className={styles.book_info_title}>ISBN :</div>
-                      <div style={{ fontSize: "16px" }}>
-                        {props.init_book.book_isbn}
+                        {props.init_movie.movie_pub_date}
                       </div>
                     </div>
                   </div>
@@ -187,6 +189,7 @@ function BookSubject(props) {
                 marginTop: "36px",
                 display: "flex",
                 justifyContent: "space-between",
+                marginBottom: "60px",
               }}
             >
               <div style={{ width: "70%" }}>
@@ -197,22 +200,85 @@ function BookSubject(props) {
                     margin: "0 0 24px 0",
                   }}
                 >
-                  <BookPageMenu
-                    book_id={props.init_book.id}
-                    current="介绍"
-                  ></BookPageMenu>
+                  <MoviePageMenu
+                    movie_id={props.init_movie.id}
+                    current="摘录"
+                  ></MoviePageMenu>
                 </div>
                 <Divider />
-                <div
-                  style={{
-                    fontSize: "16px",
-                    whiteSpace: "pre-wrap",
-                    marginBottom: "60px",
-                    lineHeight: "30px",
-                  }}
-                >
-                  {props.init_book.book_abstract}
-                </div>
+                {quote_count ? (
+                  <div>
+                    <Search
+                      placeholder="输入想要查询的句子"
+                      onSearch={onQuoteSearch}
+                      onChange={onQuoteChange}
+                      enterButton
+                      size="middle"
+                      style={{ width: "100%", marginBottom: "30px" }}
+                      value={quote_search}
+                    />
+                    <Spin
+                      size="large"
+                      spinning={isloading}
+                      delay={500}
+                      tip="正在加载中"
+                    >
+                      {movie_quotes.map((movie_quote) => {
+                        return (
+                          <div
+                            className={styles.book_quote_card}
+                            key={movie_quote.id}
+                          >
+                            {movie_quote.content}
+                            {movie_quote.reference ? (
+                              <div
+                                style={{
+                                  display: "flex",
+                                  flexDirection: "row-reverse",
+                                  paddingTop: "5px",
+                                  fontWeight: "bold",
+                                }}
+                              >
+                                {movie_quote.reference}
+                              </div>
+                            ) : null}
+                            {movie_quote.location ? (
+                              <div
+                                style={{
+                                  display: "flex",
+                                  flexDirection: "row-reverse",
+                                  paddingTop: "5px",
+                                  fontWeight: "bold",
+                                }}
+                              >
+                                出自 {movie_quote.location}
+                              </div>
+                            ) : null}
+                          </div>
+                        );
+                      })}
+                    </Spin>
+
+                    <div
+                      style={{
+                        margin: "30px 0 0 0",
+                        display: "flex",
+                        flexDirection: "row-reverse",
+                      }}
+                    >
+                      <Pagination
+                        current={quote_page}
+                        defaultPageSize={6}
+                        onChange={onChangeQuotePage}
+                        total={quote_count}
+                        loading={isloading}
+                        showSizeChanger={false}
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <Empty description="暂时没有摘录" />
+                )}
               </div>
               <div
                 style={{
@@ -238,32 +304,34 @@ export async function getServerSideProps(context) {
   const cookie_data = parseCookies(context.req);
   try {
     const res1 = await axios.get(
-      "http://infoattic.cn:8080/api/v1/books/" + context.query.book_id + "?format=json"
+      "http://infoattic.cn:8080/api/v1/movies/" +
+        context.query.movie_id +
+        "?format=json"
     );
     const res2 = await axios.get(
-      "http://infoattic.cn:8080/api/v1/bookquotes/?book=" +
-        context.query.book_id +
+      "http://infoattic.cn:8080/api/v1/moviequotes/?movie=" +
+        context.query.movie_id +
         "&format=json"
     );
     return {
       props: {
-        init_book: res1.data,
-        init_book_quote: res2.data.results,
+        init_movie: res1.data,
+        init_movie_quote: res2.data.results,
         quote_count: res2.data.count,
-        cookie_data: cookie_data
+        cookie_data: cookie_data,
       },
     };
   } catch (error) {
     return {
       props: {
-        init_book: {},
-        init_book_quote: {},
+        init_movie: {},
+        init_movie_quote: {},
         quote_count: 0,
-        cookie_data: cookie_data
+        cookie_data: cookie_data,
       },
     };
     console.log(error);
   }
 }
 
-export default withRouter(BookSubject);
+export default withRouter(MovieSubject);
